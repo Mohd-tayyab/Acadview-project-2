@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title> Song App</title>
     <link rel="stylesheet" type="text/css" href="font-awesome.css">
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
@@ -27,7 +28,45 @@
                   <audio src="song2.mp3"></audio>
                     <audio src="song3.mp3"></audio>
                       <audio src="song4.mp3"></audio>
-                <div class="list-headers">
+
+                      <table id="songs">
+                          <thead class="list-headers">
+                                  <tr><td> Title </td>
+                                  <td> Artist </td>
+                                  <td> Album </td>
+                                  <td> Duration </td>
+                              </tr></thead>
+                              <!-- <div class="song-list"> -->
+                                  <tbody><tr class="song" id="song1">
+                                      <td class="song-name"></td>
+                                      <td class="song-artist"></td>
+                                      <td class="song-album"></td>
+                                      <td class="song-length"></td>
+                                  </tr>
+                                  <tr class="song" id="song2">
+                                      <td class="song-name"></td>
+                                      <td class="song-artist"></td>
+                                      <td class="song-album"></td>
+                                      <td class="song-length"></td>
+                                  </tr>
+                                  <tr class="song" id="song3">
+                                      <td class="song-name"></td>
+                                      <td class="song-artist"></td>
+                                      <td class="song-album"></td>
+                                      <td class="song-length"></td>
+                                  </tr>
+                                  <tr class="song" id="song4">
+                                      <td class="song-name"></td>
+                                      <td class="song-artist"></td>
+                                      <td class="song-album"></td>
+                                      <td class="song-length"></td>
+                                  </tr>
+                              <!-- </div> -->
+                          </tbody></table>
+
+
+
+          <!--      <div class="list-headers">
         <div> Title </div>
         <div> Artist </div>
         <div> Album </div>
@@ -36,27 +75,53 @@
         <div class="song-list">
           <div class="song"  id="song1">
             <span class="song-name"> </span>
+              <span class="song-artist"> </span>
+              <span class="song-album"></span>
+              <span class="song-length"></span>
           </div>
           <div class="song"  id="song2">
             <span class="song-name"> </span>
+            <span class="song-artist"> </span>
+            <span class="song-album"></span>
+            <span class="song-length"></span>
           </div>
           <div class="song" id="song3">
             <span  class="song-name"> </span>
+            <span class="song-artist"> </span>
+            <span class="song-album"></span>
+            <span class="song-length"></span>
           </div>
           <div class="song" id="song4">
             <span  class="song-name"> </span>
+            <span class="song-artist"> </span>
+            <span class="song-album"></span>
+            <span class="song-length"></span>
           </div>
-    <span class="song-name"></span>
+
+  <!--<span class="song-name"></span>
        <span class="song-artist"></span>
         <span class="song-album"></span>
-        <span class="song-length"></span>
-        </div>
-        </div>
+        <span class="song-length"></span>-->
+
+
+
+        <div class="current-song-wrapper">
+                <img class="current-song-image">
+                <div>
+                <p class="current-song-name"></p>
+                <p class="current-song-album"></p>
+               	</div>
+              </div>
+
             </section>
             <footer>
                 <div class="controls">
                     <div class="player-buttons">
-                        <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+                    <i class="fa fa-random clickable disabled" aria-hidden="true"></i>
+                      <i class="fa fa-step-backward clickable" aria-hidden="true"></i>
+                      <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+                      <i class="fa fa-step-forward clickable" aria-hidden="true"></i>
+                      <i class="fa fa-repeat disabled clickable" aria-hidden="true"></i>
                     </div>
                     <div class="progress-wrapper">
                         <span class="time-elapsed"> </span>
@@ -68,176 +133,17 @@
                 </div>
             </footer>
         </div>
+
+
+    </div>
+
     </div>
     <script src="jquery.js">
     </script>
-    <script>
-    $('.welcome-screen button').on('click', function() {
-        var name = $('#name-input').val();
-        if (name.length > 2) {
-            var message = "Welcome, " + name;
-            $('.main .user-name').text(message);
-            $('.welcome-screen').addClass('hidden');//hide welcme screen
-            $('.main').removeClass('hidden');//unhide main screen
-        }
-        else {
-            $('#name-input').addClass('error');//add error class to input bar in welcome screen
-              }
-    });
-
-    function toggleSong() { //create a toggle function to play and pause song
-    var song = document.querySelector('audio');
-    if(song.paused == true) { //check if song is paused
-    console.log('Playing');
-    $('.play-icon').removeClass('fa-play').addClass('fa-pause'); //change play icon to pause icon
-    song.play(); //play song
-    }
-    else {
-    console.log('Pausing');
-    $('.play-icon').removeClass('fa-pause').addClass('fa-play'); //change pause icon to play icon
-    song.pause(); // pause song
-    }
-    }
-
-    $('.play-icon').on('click', function() {//on click button function
-      //  var song = document.querySelector('audio');
-      //  if (song.paused == true) {//check if song is paused
-        //    console.log('Playing');
-        //    $('.play-icon').removeClass('fa-play').addClass('fa-pause');//change play icon to pause icon
-        //   song.play();//play song
-          toggleSong();
-      //  }
-        //else {
-          //  console.log('Pausing');
-          //  $('.play-icon').removeClass('fa-pause').addClass('fa-play');//change pause icon to play icon
-          //  song.pause();// pause song
-      //  }
-    });
-    $('body').on('keypress', function(event) {//on keypress function
-                if (event.keyCode == 32) { //spacebar key code is 32
-                  toggleSong();
-
-                  //  var song = document.querySelector('audio');
-                  //  if (song.paused == true) {
-                  //      console.log('Playing');
-                    //    $('.play-icon').removeClass('fa-play').addClass('fa-pause');//change play icon to pause icon
-                    //    song.play();//play song
-                  //  } else {
-                  //      console.log('Pausing');
-                  //      $('.play-icon').removeClass('fa-pause').addClass('fa-play');//change pause icon to play icon
-                  //      song.pause();// pause song
-                  //  }
-               }
-            });
-
-            function fancyTimeFormat(time)
-            {
-              // Hours, minutes and seconds
-              var hrs = ~~(time / 3600);
-              var mins = ~~((time % 3600) / 60);
-              var secs = time % 60;
-
-              // Output like "1:01" or "4:03:59" or "123:03:59"
-              var ret = "";
-
-              if (hrs > 0) {
-                ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-              }
-
-              ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-              ret += "" + secs;
-              return ret;
-            }
-
-
-            function updateCurrentTime() {//create a function to show current time and duration of song
-              var song = document.querySelector('audio');
-            //  console.log(song.currentTime);//shows how much we have listen song
-            //  console.log(song.duration);//shows total duration of song
-            var currentTime = Math.floor(song.currentTime);//convert all decimal no. to int math.floor()
-            currentTime = fancyTimeFormat(currentTime); // call fun fancytimeformat
-            var duration = Math.floor(song.duration); //convert all decimal no. to int math.floor()
-             duration = fancyTimeFormat(duration) // call fun fancytimeformat
-            $('.time-elapsed').text(currentTime); //show current time
-            $('.song-duration').text(duration); //show duration of song
-            }
-            //var songName1 = 'Badri Ki Dulhania (Title Track)';
-            //var songName2 = 'Humma Song';
-            //var songName3 = 'Nashe Si Chadh Gayi';
-          //  var songName4 = 'The Breakup Song';
-
-        //using array to create a list of songs name
-
-
-          window.onload = function() {//ask the website to load and once its loaded run function code inside it
-              var songList = ['Badri Ki Dulhania (Title Track)', 'Humma Song', 'Nashe Si Chadh Gayi', 'The Breakup Song'];
-              $('#song1 .song-name').text(songList[0]);//songlist[0] repreasent 1st song
-              $('#song2 .song-name').text(songList[1]);//songlist[1] repreasent 2nd song
-              $('#song3 .song-name').text(songList[2]);//songlist[2] repreasent 3rd song
-              $('#song4 .song-name').text(songList[3]);//songlist[3] repreasent 4th song
-              updateCurrentTime();
-               // setTimeout(function() {//we want the function to wait 1 sec and then run code inside function
-                setInterval(function() { //jitne milliseconds bolte ho, unte samay ke baad,again jo function ke andar code hai usko run karta rehta hai
-                updateCurrentTime();
-              },1000);
-              }
-              var fileNames = ['song1.mp3','song2.mp3','song3.mp3','song4.mp3'];
-              $('#song1').click(function() {//func for song 1
-                var audio = document.querySelector('audio');
-                var currentSong = audio.src;
-                if(currentSong.search(fileNames[0]) != -1)  //If the string is not found, it gives us the -1 value else location of string
-
-                {
-                    toggleSong();
-                  }
-                  else {
-                    audio.src = fileNames[0];
-                    toggleSong();
-                  }
-                });
-
-                $('#song2').click(function() {
-                  var audio = document.querySelector('audio');
-                  var currentSong = audio.src;
-                  if(currentSong.search(fileNames[1]) != -1)
-                  {
-                    toggleSong();
-                  }
-                  else {
-                    audio.src = fileNames[1];
-                    toggleSong();
-                  }
-                });
-
-                $('#song3').click(function() {
-                  var audio = document.querySelector('audio');
-                  var currentSong = audio.src;
-                  if(currentSong.search(fileNames[2]) != -1)
-                  {
-                    toggleSong();
-                  }
-                  else {
-                    audio.src = fileNames[2];
-                    toggleSong();
-                  }
-                });
-
-                $('#song4').click(function() {
-                  var audio = document.querySelector('audio');
-                  var currentSong = audio.src;
-                  if(currentSong.search(fileNames[3]) != -1)
-                  {
-                    toggleSong();
-                  }
-                  else {
-                    audio.src = fileNames[3];
-                    toggleSong();
-                  }
-                });
-
-
-
-    </script>
+  </script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js">
+</script>
+  <script src="main.js"></script>
 </body>
 
 </html>

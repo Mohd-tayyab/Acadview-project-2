@@ -65,7 +65,7 @@ h1 {
     font-size: 1.5rem;
     justify-content: center;
     align-items: center;
-  
+
 }
 
 .hidden {
@@ -164,4 +164,51 @@ h1 {
 
 .song-length {
     text-align: right;
+}
+.content {
+    position: relative;
+}
+.current-song-wrapper {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+
+.current-song-image {
+    height: 100px;
+    width: 100px;
+    margin-right: 1rem;
+}
+
+.current-song-name {
+    font-size: 1.4rem;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+.current-song-album {
+    margin-top: 0.4rem;
+}
+/*DataTables overrides*/
+table.dataTable tbody tr {
+   background-color: initial;
+}
+#songs_info {
+   display: none;
+}
+
+#songs_filter {
+   color: transparent;
+}
+#songs_filter input {
+   width: 400px;
+   margin-bottom: 1rem;
+   font-size: 16px;
+}
+.player-buttons .fa {
+    margin-right: 2rem;
+}
+
+.fa.disabled {
+    color: gray;
 }
