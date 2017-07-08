@@ -1,6 +1,7 @@
 var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0;
+var Playingnumber=0;
 $('.welcome-screen button').on('click', function() {
     var name = $('#name-input').val();
     if (name.length > 2) {
@@ -161,38 +162,41 @@ $('.play-icon').on('click', function() {//on click button function
 
   //Array of objects
   var songs = [{
-        'name': 'Badri Ki Dulhania (Title Track)',
-        'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
-        'album': 'Badrinath ki Dulhania',
-        'duration': '2:56',
+        'name': 'Ishq Mubarak (Title Track)',
+        'artist': 'Arijit Singh',
+        'album': 'Tum Bin 2',
+        'duration': '4:56',
        'fileName': 'song1.mp3',
          'image':'song1.jpg'
     },
-    {
-        'name': 'Humma Song',
-        'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
-        'album': 'Ok Jaanu',
-        'duration': '3:15',
-        'fileName': 'song2.mp3',
-          'image':'song2.jpg'
-    },
-    {
-        'name': 'Nashe Si Chadh Gayi',
-        'artist': 'Arijit Singh',
-        'album': 'Befikre',
-        'duration': '2:34',
-        'fileName': 'song3.mp3',
-          'image':'song3.jpg'
-    },
+
+
     {
         'name': 'The Breakup Song',
         'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
         'album': 'Ae Dil Hai Mushkil',
-        'duration': '2:29',
+        'duration': '4:12',
+        'fileName': 'song2.mp3',
+        'image':'song2.jpg'
+    },
+
+    {
+        'name': 'Yaad Hai Na',
+        'artist': 'Arijit Singh',
+        'album': 'Raaz: Reboot',
+        'duration': '4:06',
+        'fileName': 'song3.mp3',
+          'image':'song3.jpg'
+    },
+    {
+        'name': ' Koi Ishara',
+        'artist': 'Arman Malik, Amaal Malik',
+        'album': 'Force 2',
+        'duration': '4:11',
         'fileName': 'song4.mp3',
-        'image':'song4.jpg'
+          'image':'song4.jpg'
     }]
-    function changeCurrentSongDetails(songObj) {
+  function changeCurrentSongDetails(songObj) {
     $('.current-song-image').attr('src','img/' + songObj.image)
     $('.current-song-name').text(songObj.name)
     $('.current-song-album').text(songObj.album)
@@ -220,6 +224,7 @@ $('.play-icon').on('click', function() {//on click button function
        var obj = songs[i];//Save the song object in variable 'obj'
        var name = '#song' + (i+1);
        var song = $(name);
+
        song.find('.song-name').text(obj.name);// Pick the relevant object property and show it in the website
        song.find('.song-artist').text(obj.artist);
        song.find('.song-album').text(obj.album);
@@ -246,6 +251,7 @@ $('.play-icon').on('click', function() {//on click button function
         //  function addSongNameClickEvent(songName,position) {
             var id = '#song' + position; //if song position is 1 then song is"song1"
           $(id).click(function() {//func for song 1
+              Playingnumber=position-1;
             var audio = document.querySelector('audio');
             var currentSong = audio.src;
             if(songNumber !=position)  //If the string is not found, it gives us the -1 value else location of string
@@ -260,6 +266,74 @@ $('.play-icon').on('click', function() {//on click button function
             //  }
             });
           }
+
+          $(".fa-step-forward").click(function(){
+            if(Playingnumber==songs.length-1){
+                console.log("1");
+              Playingnumber=0;
+              changesong();
+
+            }
+            else if(willShuffle == 1)
+            {
+
+            }
+
+            else {
+              console.log("2");
+              console.log("Playingnumber")
+              Playingnumber++;
+              changesong();
+            }
+          })
+
+          $(".fa-step-backward").click(function(){
+            if(Playingnumber==0){
+                console.log("1");
+                Playingnumber=songs.length-1;
+                changesong();
+              }
+              else {
+                  Playingnumber--;
+                  changesong();
+              }
+            })
+
+
+
+
+
+          function changesong()
+          {
+            var music=songs[Playingnumber].fileName;
+            var song=document.querySelector("audio");
+            song.src=music;
+            toggleSong();
+            changeCurrentSongDetails(songs[Playingnumber])
+            updateTimer();
+          }
+
+          function updateTimer()
+            {
+              var song=document.querySelector('audio');
+              var ct=song.currentTime;
+              var td=song.duration;
+              var percentage=(ct/td)*100;
+              $(".progress-filled").css('width',percentage+"%");
+            }
+            $(".player-progress").click(function(event){
+              var $this=$(this);
+              var widthclicked=event.pageX-$this.offset().left;
+              var totalwidth= $this.width();
+              var calc=(widthclicked/totalwidth)*100;
+              var song =document.querySelector('audio');
+              song.currentTime=(song.duration*calc)/100;
+              updateTimer();
+
+            });
+
+
+
         //  addSongNameClickEvent(fileNames[0],1);//first param is song name and 2nd is position of song
         //  addSongNameClickEvent(fileNames[1],2);//first param is song name and 2nd is position of song
         //  addSongNameClickEvent(fileNames[2],3);//first param is song name and 2nd is position of song
