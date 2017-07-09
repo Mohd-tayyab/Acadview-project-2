@@ -1,0 +1,29 @@
+[33mcommit 8cf423ce83883893f7f60674c82ff57371e4420e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: mohd tayyab <mohdrz789@gmail.com>
+Date:   Sat Jul 8 15:07:37 2017 +0530
+
+    next and previous button functionality added
+
+[33mcommit f9c46cd61aa087f72f3cd166d3fe9fb878ad5b20[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: mohd tayyab <mohdrz789@gmail.com>
+Date:   Thu Jul 6 13:03:59 2017 +0530
+
+    shuffle and loop functionality added
+
+[33mcommit 0b79484813358fbe1c20459bc7686c24e02e7d9c[m
+Author: mohd tayyab <mohdrz789@gmail.com>
+Date:   Sat Jul 1 16:03:16 2017 +0530
+
+    songs list added with play and pause functionality
+
+[33mcommit 92d99a79ab676502a77fef677c01d9e454405d48[m
+Author: mohd tayyab <mohdrz789@gmail.com>
+Date:   Wed Jun 21 00:13:36 2017 +0530
+
+    jquery file added
+
+[33mcommit 68c859b441671057ec8be084ce9bb3d9d4759c11[m
+Author: mohd tayyab <mohdrz789@gmail.com>
+Date:   Tue Jun 20 11:26:55 2017 +0530
+
+    project to make a music player using html, css, javascript started

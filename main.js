@@ -2,6 +2,7 @@ var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0;
 var Playingnumber=0;
+var changemenu=0;
 $('.welcome-screen button').on('click', function() {
     var name = $('#name-input').val();
     if (name.length > 2) {
@@ -28,7 +29,7 @@ $('.fa-random').on('click',function() {
 
     function timeJump() {
     var song = document.querySelector('audio')
-    song.currentTime = song.duration - 5;
+    song.currentTime = song.duration -15;
     }
     //FUN() TO GENERATE RANDOM NO.
     function randomExcluded(min, max, excluded) {
@@ -69,7 +70,11 @@ $('.fa-random').on('click',function() {
       }
   })
 
-function toggleSong() { //create a toggle function to play and pause song
+function toggleSong() {
+
+  if(changemenu==0)
+  {
+   //create a toggle function to play and pause song
 var song = document.querySelector('audio');
 if(song.paused == true) { //check if song is paused
 console.log('Playing');
@@ -82,6 +87,8 @@ $('.play-icon').removeClass('fa-pause').addClass('fa-play'); //change pause icon
 song.pause(); // pause song
 }
 }
+}
+
 
 $('.play-icon').on('click', function() {//on click button function
   //  var song = document.querySelector('audio');
@@ -162,7 +169,7 @@ $('.play-icon').on('click', function() {//on click button function
 
   //Array of objects
   var songs = [{
-        'name': 'Ishq Mubarak (Title Track)',
+        'name': '1. Ishq Mubarak (Title Track)',
         'artist': 'Arijit Singh',
         'album': 'Tum Bin 2',
         'duration': '4:56',
@@ -172,7 +179,7 @@ $('.play-icon').on('click', function() {//on click button function
 
 
     {
-        'name': 'The Breakup Song',
+        'name': '2. The Breakup Song',
         'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
         'album': 'Ae Dil Hai Mushkil',
         'duration': '4:12',
@@ -181,7 +188,7 @@ $('.play-icon').on('click', function() {//on click button function
     },
 
     {
-        'name': 'Yaad Hai Na',
+        'name': '3. Yaad Hai Na',
         'artist': 'Arijit Singh',
         'album': 'Raaz: Reboot',
         'duration': '4:06',
@@ -189,7 +196,7 @@ $('.play-icon').on('click', function() {//on click button function
           'image':'song3.jpg'
     },
     {
-        'name': ' Koi Ishara',
+        'name': '4.  Koi Ishara',
         'artist': 'Arman Malik, Amaal Malik',
         'album': 'Force 2',
         'duration': '4:11',
@@ -231,23 +238,37 @@ $('.play-icon').on('click', function() {//on click button function
        song.find('.song-length').text(obj.duration);
        addSongNameClickEvent(obj,i+1);//Add a click event on each song
 
+
+
+
     }
+
+  //  $('#songs').DataTable();
+    $('#songs').DataTable({
+    paging: false
+    });
+
           updateCurrentTime();
            // setTimeout(function() {//we want the function to wait 1 sec and then run code inside function
             setInterval(function() { //jitne milliseconds bolte ho, unte samay ke baad,again jo function ke andar code hai usko run karta rehta hai
             updateCurrentTime();
           },1000);
-          }
-        //  $('#songs').DataTable();
 
-        $('#songs').DataTable({
-        paging: false
-      });
+
+
+
+          }
+
+
+
 
           var songNumber=1;
           function addSongNameClickEvent(songObj,position) {
-              var songName = songObj.fileName; // New Variable
 
+if(changemenu==0)
+{
+
+                var songName = songObj.fileName; // New Variable
         //  function addSongNameClickEvent(songName,position) {
             var id = '#song' + position; //if song position is 1 then song is"song1"
           $(id).click(function() {//func for song 1
@@ -265,17 +286,16 @@ $('.play-icon').on('click', function() {//on click button function
                 toggleSong();
             //  }
             });
-          }
+
+}
+
+        }
 
           $(".fa-step-forward").click(function(){
             if(Playingnumber==songs.length-1){
                 console.log("1");
               Playingnumber=0;
               changesong();
-
-            }
-            else if(willShuffle == 1)
-            {
 
             }
 
@@ -331,6 +351,97 @@ $('.play-icon').on('click', function() {//on click button function
               updateTimer();
 
             });
+
+            $('audio').on('timeupdate', function() {
+              var audio = document.querySelector('audio');
+              $('.progress-filled').stop().animate({'width': (audio.currentTime) / audio.duration * 100 + '%'}, 250, 'linear');
+            });
+
+            // The 'scrub' function: it updates the current time whenever the user clicks
+            // anywhere on the progress bar.
+            $('.player-progress').on('click', function(event) {
+              var audio = document.querySelector('audio');
+              var progress = document.querySelector('.player-progress');
+
+              var scrubTime = (event.offsetX / progress.offsetWidth) * audio.duration;
+              audio.currentTime = scrubTime;
+            });
+
+            //function for skip forward
+            $('.fa-caret-square-o-right').on('click', function() {
+              skip(10); //skip song for 10sec forward
+              });
+
+              //fun() for skip backward
+              $('.fa-caret-square-o-left').on('click', function() {
+                skip1(10);//skip song for 10sec backward
+                });
+
+              function skip(value)
+              {
+                var song = document.querySelector('audio')
+                song.currentTime += value;
+              }
+
+              function skip1(value)
+              {
+                var song = document.querySelector('audio')
+                song.currentTime -= value;
+              }
+
+
+
+
+
+              function removeTransition(e) {
+    if (e.propertyName !== 'transform')
+    return;
+    e.target.classList.remove('playing');
+  }
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio)
+    return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+
+
+  $('.fa-signal').on('click',function() {
+      $('.fa-signal').toggleClass('disabled');
+        changemenu = 1 - changemenu;
+        console.log(changemenu);
+        if (changemenu == 1)
+        {
+          $('.mymenu').removeClass('hidden');
+          $('.fa-repeat').addClass('disabled');
+            $('.fa-random').addClass('disabled');
+            $('.fa-step-backward').addClass('disabled');
+            $('.fa-step-forward').addClass('disabled');
+           $('.fa-caret-square-o-right').addClass('disabled');
+            $('.fa-caret-square-o-left').addClass('disabled');
+            $('.fa-play').addClass('disabled');
+            $('.fa-pause').addClass('disabled');
+            $('.content').addClass('hidden');
+
+        }
+        else
+        {
+          $('.content').removeClass('hidden');
+          $('.mymenu').addClass('hidden');
+        }
+      });
+
+
+
 
 
 
