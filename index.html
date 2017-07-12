@@ -25,10 +25,10 @@
             </header>
 
 
-<div class="wrapper hidden">
-<section class="welcome-screen">
+<div class="mymenu hidden">
+<section class="welcome-screen1">
             <div class="keys">
-               <div data-key="65" class="key">
+               <div data-key="65" class="key hidden">
               <kbd>A</kbd>
                  <span class="sound">clap</span>
                </div>
@@ -65,8 +65,8 @@
                   <span class="sound">tink</span>
                 </div>
               </div>
-
-              <audio data-key="65" src="sounds/clap.wav"></audio>
+<div class="drumplaylist hidden">
+                <audio data-key="65" src="song1.mp3"></audio>
                 <audio data-key="83" src="sounds/hihat.wav"></audio>
                 <audio data-key="68" src="sounds/kick.wav"></audio>
                 <audio data-key="70" src="sounds/openhat.wav"></audio>
@@ -75,6 +75,7 @@
                 <audio data-key="74" src="sounds/snare.wav"></audio>
                 <audio data-key="75" src="sounds/tom.wav"></audio>
                 <audio data-key="76" src="sounds/tink.wav"></audio>
+              </div>
 </section>
 </div>
 
@@ -94,7 +95,7 @@
                                   <tr><td> Title </td>
                                   <td> Artist </td>
                                   <td> Album </td>
-                                  <td> Duration </td>
+                                  <td><span class="fa fa-calendar-plus-o"></span></td>
                               </tr></thead>
                               <!-- <div class="song-list"> -->
                                   <tbody><tr class="song" id="song1">
@@ -196,8 +197,16 @@
                         </div>
                         <span class="song-duration"></span>
                     </div>
+
+
+
                 </div>
+
+
+
             </footer>
+
+
         </div>
 
 
