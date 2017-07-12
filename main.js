@@ -265,8 +265,7 @@ $('.play-icon').on('click', function() {//on click button function
           var songNumber=1;
           function addSongNameClickEvent(songObj,position) {
 
-if(changemenu==0)
-{
+
 
                 var songName = songObj.fileName; // New Variable
         //  function addSongNameClickEvent(songName,position) {
@@ -287,7 +286,7 @@ if(changemenu==0)
             //  }
             });
 
-}
+
 
         }
 
@@ -416,29 +415,21 @@ if(changemenu==0)
 
 
   $('.fa-signal').on('click',function() {
-      $('.fa-signal').toggleClass('disabled');
+     $('.fa-signal').toggleClass('disabled');
         changemenu = 1 - changemenu;
         console.log(changemenu);
-        if (changemenu == 1)
-        {
-          $('.mymenu').removeClass('hidden');
-          $('.fa-repeat').addClass('disabled');
-            $('.fa-random').addClass('disabled');
-            $('.fa-step-backward').addClass('disabled');
-            $('.fa-step-forward').addClass('disabled');
-           $('.fa-caret-square-o-right').addClass('disabled');
-            $('.fa-caret-square-o-left').addClass('disabled');
-            $('.fa-play').addClass('disabled');
-            $('.fa-pause').addClass('disabled');
+       if (changemenu == 1)
+  {
+        $('.wrapper').removeClass('hidden');
             $('.content').addClass('hidden');
 
-        }
+      }
         else
         {
           $('.content').removeClass('hidden');
-          $('.mymenu').addClass('hidden');
+          $('.wrapper').addClass('hidden');
         }
-      });
+     });
 
 
 
