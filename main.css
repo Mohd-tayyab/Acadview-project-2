@@ -245,7 +245,7 @@ table.dataTable tbody tr {
 }
 
 kbd {
-  display: block;
+  display: block-inline;
   font-size: 4rem;
 }
 

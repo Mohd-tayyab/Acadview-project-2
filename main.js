@@ -71,10 +71,10 @@ $('.fa-random').on('click',function() {
 //  })
 
 //The actual looping code. Runs only if looping is enabled.
-$('audio').on('ended', function() {
+$('.myaudio').on('ended', function() {
   // Run the following code only if willLoop == 1, i.e., if the player will loop.
   if(willLoop) {
-    var audio = document.querySelector('audio');
+    var audio = document.querySelector('.myaudio');
     if(currentSongNumber < songs.length) {
       // PLay the next song
       var nextSongObj = songs[currentSongNumber];
@@ -93,9 +93,9 @@ $('audio').on('ended', function() {
   }
 });
 
-$('audio').on('ended', function() {
+$('.myaudio').on('ended', function() {
   if(willShuffle) {
-    audio = document.querySelector('audio');
+    audio = document.querySelector('.myaudio');
     currentSongNumber = Math.floor((Math.random() * 4) + 1);
     var nextSongObj = songs[currentSongNumber - 1];
     audio.src = nextSongObj.fileName;
@@ -112,7 +112,7 @@ function toggleSong() {
   if(changemenu==0)
   {
    //create a toggle function to play and pause song
-var song = document.querySelector('audio');
+var song = document.querySelector('.myaudio');
 if(song.paused == true) { //check if song is paused
 console.log('Playing');
 $('.play-icon').removeClass('fa-play').addClass('fa-pause'); //change play icon to pause icon
@@ -182,7 +182,7 @@ $('.play-icon').on('click', function() {//on click button function
 
 
         function updateCurrentTime() {//create a function to show current time and duration of song
-          var song = document.querySelector('audio');
+          var song = document.querySelector('.myaudio');
         //  console.log(song.currentTime);//shows how much we have listen song
         //  console.log(song.duration);//shows total duration of song
         var currentTime = Math.floor(song.currentTime);//convert all decimal no. to int math.floor()
@@ -336,7 +336,7 @@ $('.play-icon').on('click', function() {//on click button function
   var fileName = song.fileName;
   $(songId).on('click', function() {
     currentSongNumber = (position > 0 && position <= songs.length) ? position : ((position > songs.length) ? songs.length : 1);
-    var audio = document.querySelector('audio');
+    var audio = document.querySelector('.myaudio');
     if(audio.src.search(fileName) != -1) {
       toggleSong();
     }
@@ -367,7 +367,7 @@ $('.play-icon').on('click', function() {//on click button function
         //  })
 
         $('.fa-step-forward').on('click', function() {
-          var audio = document.querySelector('audio');
+          var audio = document.querySelector('.myaudio');
           if(currentSongNumber < songs.length) {
             currentSongNumber++;
             var nextSongObj = songs[currentSongNumber - 1];
@@ -412,7 +412,7 @@ $('.play-icon').on('click', function() {//on click button function
           //  updateTimer();
         //  }
         $('.fa-step-backward').on('click', function() {
-  var audio = document.querySelector('audio');
+  var audio = document.querySelector('.myaudio');
   if(currentSongNumber >= 1) {
     currentSongNumber--;
     var prevSongObj = songs[currentSongNumber - 1];
@@ -430,7 +430,7 @@ $('.play-icon').on('click', function() {//on click button function
 
           function updateTimer()
             {
-              var song=document.querySelector('audio');
+              var song=document.querySelector('.myaudio');
               var ct=song.currentTime;
               var td=song.duration;
               var percentage=(ct/td)*100;
@@ -441,21 +441,21 @@ $('.play-icon').on('click', function() {//on click button function
               var widthclicked=event.pageX-$this.offset().left;
               var totalwidth= $this.width();
               var calc=(widthclicked/totalwidth)*100;
-              var song =document.querySelector('audio');
+              var song =document.querySelector('.myaudio');
               song.currentTime=(song.duration*calc)/100;
               updateTimer();
 
             });
 
-            $('audio').on('timeupdate', function() {
-              var audio = document.querySelector('audio');
+            $('.myaudio').on('timeupdate', function() {
+              var audio = document.querySelector('.myaudio');
               $('.progress-filled').stop().animate({'width': (audio.currentTime) / audio.duration * 100 + '%'}, 250, 'linear');
             });
 
             // The 'scrub' function: it updates the current time whenever the user clicks
             // anywhere on the progress bar.
             $('.player-progress').on('click', function(event) {
-              var audio = document.querySelector('audio');
+              var audio = document.querySelector('.myaudio');
               var progress = document.querySelector('.player-progress');
 
               var scrubTime = (event.offsetX / progress.offsetWidth) * audio.duration;
@@ -474,13 +474,13 @@ $('.play-icon').on('click', function() {//on click button function
 
               function skip(value)
               {
-                var song = document.querySelector('audio')
+                var song = document.querySelector('.myaudio')
                 song.currentTime += value;
               }
 
               function skip1(value)
               {
-                var song = document.querySelector('audio')
+                var song = document.querySelector('.myaudio')
                 song.currentTime -= value;
               }
 
