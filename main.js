@@ -28,7 +28,7 @@ $('.fa-random').on('click',function() {
 });
 
     function timeJump() {
-    var song = document.querySelector('audio')
+    var song = document.querySelector('.myaudio')
     song.currentTime = song.duration -15;
     }
     //FUN() TO GENERATE RANDOM NO.
@@ -71,7 +71,7 @@ $('.fa-random').on('click',function() {
 //  })
 
 //The actual looping code. Runs only if looping is enabled.
-$('.myaudio').on('ended', function() {
+$('audio').on('ended', function() {
   // Run the following code only if willLoop == 1, i.e., if the player will loop.
   if(willLoop) {
     var audio = document.querySelector('.myaudio');
@@ -495,14 +495,17 @@ $('.play-icon').on('click', function() {//on click button function
   }
 
   function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+     if (changemenu == 1)
+     {
+    const audio = document.querySelector(`.drumaudio[data-key="${e.keyCode}"]`);
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!audio)
+    if (!audio && input)
     return;
 
     key.classList.add('playing');
     audio.currentTime = 0;
     audio.play();
+  }
   }
 
   const keys = Array.from(document.querySelectorAll('.key'));
